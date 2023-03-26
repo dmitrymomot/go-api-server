@@ -9,24 +9,19 @@ import (
 )
 
 func init() {
-	if appDebug {
-		// SetReportCaller sets whether the standard logger will include the calling
-		// method as a field.
-		// logrus.SetReportCaller(true)
+	// SetLevel sets the global log level used by the standard logger.
+	logrus.SetLevel(getLogrusLogLevel(appLogLevel))
 
-		// Only log the debug severity or above.
-		logrus.SetLevel(logrus.DebugLevel)
+	// SetReportCaller sets whether the standard logger will include the calling
+	// method as a field.
+	// logrus.SetReportCaller(true)
 
-		logrus.SetFormatter(&logrus.TextFormatter{
-			ForceColors: true,
-		})
-	} else {
-		// Only log the info severity or above.
-		logrus.SetLevel(logrus.InfoLevel)
-
-		// Log as JSON instead of the default ASCII formatter.
-		logrus.SetFormatter(&logrus.JSONFormatter{})
-	}
+	// Default formatter is the standard logger.
+	logrus.SetFormatter(&logrus.TextFormatter{
+		ForceColors: true,
+	})
+	// Log as JSON instead of the default ASCII formatter.
+	// logrus.SetFormatter(&logrus.JSONFormatter{})
 
 	// Output to stdout instead of the default stderr
 	// Can be any io.Writer, see below for File example
@@ -39,4 +34,24 @@ func init() {
 	gob.Register(map[string]interface{}{})
 	gob.Register(map[string][]interface{}{})
 	gob.Register(map[interface{}]interface{}{})
+}
+
+// getLogrusLogLevel returns logrus log level by string.
+func getLogrusLogLevel(level string) logrus.Level {
+	switch level {
+	case "debug":
+		return logrus.DebugLevel
+	case "info":
+		return logrus.InfoLevel
+	case "warn":
+		return logrus.WarnLevel
+	case "error":
+		return logrus.ErrorLevel
+	case "fatal":
+		return logrus.FatalLevel
+	case "panic":
+		return logrus.PanicLevel
+	default:
+		return logrus.InfoLevel
+	}
 }

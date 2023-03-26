@@ -9,8 +9,9 @@ import (
 
 var (
 	// Application
-	appName  = env.GetString("APP_NAME", "api")
-	appDebug = env.GetBool("APP_DEBUG", false)
+	appName     = env.GetString("APP_NAME", "api")
+	appDebug    = env.GetBool("APP_DEBUG", false)
+	appLogLevel = env.GetString("APP_LOG_LEVEL", "info")
 
 	// HTTP Router
 	httpPort                  = env.GetInt("HTTP_PORT", 8080)
@@ -39,6 +40,7 @@ var (
 	// Worker
 	workerConcurrency     = env.GetInt("WORKER_CONCURRENCY", 10)
 	workerShutdownTimeout = env.GetDuration("WORKER_SHUTDOWN_TIMEOUT", time.Second*5)
+	workerLogLevel        = env.GetString("WORKER_LOG_LEVEL", "info")
 	queueName             = env.GetString("QUEUE_NAME", "default")
 	queueTaskDeadline     = env.GetDuration("QUEUE_TASK_DEADLINE", time.Minute)
 	queueMaxRetry         = env.GetInt("QUEUE_TASK_RETRY_LIMIT", 3)

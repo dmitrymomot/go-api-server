@@ -4,12 +4,13 @@ import (
 	"database/sql"
 
 	"github.com/hibiken/asynq"
+	_ "github.com/lib/pq" // init pg driver
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	// Init logger
+	// Init logger with fields
 	logger := logrus.WithFields(logrus.Fields{
 		"app":       appName,
 		"build_tag": buildTagRuntime,
