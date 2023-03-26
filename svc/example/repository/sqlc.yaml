@@ -1,6 +1,6 @@
 version: "1"
 packages:
-  - name: "repository"
+  - name: "example_repository"
     path: "."
     queries: "./sql/query/"
     schema: "./sql/migrations/"
