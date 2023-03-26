@@ -13,6 +13,7 @@ require (
 	github.com/hibiken/asynq v0.24.0
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/gommon v0.4.0
+	github.com/magefile/mage v1.14.0
 	github.com/mcnijman/go-emailaddress v1.1.0
 	github.com/mr-tron/base58 v1.2.0
 	github.com/pkg/errors v0.9.1
