@@ -15,9 +15,10 @@ import (
 func Migrate() error {
 	color.Cyan("Preparing migrations...")
 	if err := sh.RunV("make", "prepare-migrations"); err != nil {
-		return err
+		color.Red("Failed to prepare migrations: %s", err)
+	} else {
+		color.Yellow("Migrations copied to migrations directory.")
 	}
-	color.Yellow("Migrations copied to migrations directory.")
 
 	color.Cyan("Migrating database...")
 	return sh.RunV("go", "run", "./cmd/migrate/")
